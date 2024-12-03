@@ -1456,7 +1456,7 @@ public abstract class Provider extends Properties {
                 Service newSvc;
                 MappingInfo oldMi = find(key);
                 if (oldMi.svc != null) {
-                    // Service exits.
+                    // Service exists.
                     if (!oldMi.isLegacy) {
                         // Don't update services added with the Current API.
                         return SvcOpResult.ERROR;
