@@ -670,7 +670,7 @@ public final class ProvidersFilter {
 
     static {
         Filter tmpFilter = null;
-        String fStr = SecurityProperties.privilegedGetOverridable(FILTER_PROP);
+        String fStr = SecurityProperties.getOverridableProperty(FILTER_PROP);
         if (fStr != null && !fStr.isEmpty()) {
             tmpFilter = new Filter(fStr);
         }
