@@ -1,0 +1,102 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class User {
+    private int id;
+    private String name;
+
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Name: " + name;
+    }
+}
+
+public class Main {
+    private static ArrayList<User> users = new ArrayList<>();
+    private static int idCounter = 1;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Add User");
+            System.out.println("2. Display Users");
+            System.out.println("3. Delete User");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter user name: ");
+                    String name = scanner.nextLine();
+                    addUser (name);
+                    break;
+                case 2:
+                    displayUsers();
+                    break;
+                case 3:
+                    System.out.print("Enter user ID to delete: ");
+                    int id = scanner.nextInt();
+                    deleteUser (id);
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+
+    private static void addUser (String name) {
+        User user = new User(idCounter++, name);
+        users.add(user);
+        System.out.println("User  added: " + user);
+    }
+
+    private static void displayUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users found.");
+        } else {
+            System.out.println("User  List:");
+            for (User  user : users) {
+                System.out.println(user);
+            }
+        }
+    }
+
+    private static void deleteUser (int id) {
+        User userToRemove = null;
+        for (User  user : users) {
+            if (user.getId() == id) {
+                userToRemove = user;
+                break;
+            }
+        }
+        if (userToRemove != null) {
+            users.remove(userToRemove);
+            System.out.println("User  deleted: " + userToRemove);
+        } else {
+            System.out.println("User  not found with ID: " + id);
+        }
+    }
+}
